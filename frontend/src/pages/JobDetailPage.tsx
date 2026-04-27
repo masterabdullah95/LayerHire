@@ -8,6 +8,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { MapPin, Briefcase, BadgeDollarSign, Clock, Building2, ArrowLeft } from 'lucide-react'
+import EditJobModal from '@/features/jobs/EditJobModal'
+import { Pencil, Trash2 } from 'lucide-react'
 
 
 
@@ -15,13 +17,28 @@ const formatSalary = (min: number, max: number) =>
   `$${min.toLocaleString()} — $${max.toLocaleString()}`
 
 const JobDetailPage = () => {
+  const { isAuthenticated, isSeeker, isRecruiter, user } = useAuth()
+  const [editOpen, setEditOpen] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const { deleteJob } = useJobs()
+
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { selectedJob: job, isLoading, fetchJobById } = useJobs()
-  const { isAuthenticated, isSeeker } = useAuth()
   const { checkHasApplied } = useApplications()
   const [applyOpen, setApplyOpen] = useState(false)
   const [hasApplied, setHasApplied] = useState(false)
+
+  const handleDelete = async () => {
+    if (!job || !confirm('Are you sure you want to delete this job?')) return
+    setIsDeleting(true)
+    try {
+      await deleteJob(job._id)
+      navigate('/')
+    } finally {
+      setIsDeleting(false)
+    }
+  }
 
   useEffect(() => {
     
@@ -99,19 +116,28 @@ const JobDetailPage = () => {
         <Separator />
 
         {/* Apply button — role aware */}
+        {/* Action buttons — role aware */}
         {!isAuthenticated && (
           <Button size="lg" onClick={() => navigate('/login')}>
             Sign in to apply
           </Button>
         )}
         {isSeeker && (
-          <Button
-            size="lg"
-            disabled={hasApplied}
-            onClick={() => setApplyOpen(true)}
-          >
+          <Button size="lg" disabled={hasApplied} onClick={() => setApplyOpen(true)}>
             {hasApplied ? 'Already applied' : 'Apply for this position'}
           </Button>
+        )}
+        {isRecruiter && user?.id === job.recruiterId && (
+          <div className="flex gap-2">
+            <Button size="lg" variant="outline" onClick={() => setEditOpen(true)}>
+              <Pencil className="h-4 w-4 mr-2" />
+              Edit job
+            </Button>
+            <Button size="lg" variant="destructive" disabled={isDeleting} onClick={handleDelete}>
+              <Trash2 className="h-4 w-4 mr-2" />
+              {isDeleting ? 'Deleting...' : 'Delete job'}
+            </Button>
+          </div>
         )}
       </div>
 
@@ -151,6 +177,14 @@ const JobDetailPage = () => {
           if (id) checkHasApplied(id).then(setHasApplied)
         }}
       />
+
+      {/* Edit Modal */}
+      <EditJobModal
+        job={job}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+      />
+
     </div>
   )
 }

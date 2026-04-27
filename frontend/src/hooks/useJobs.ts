@@ -41,6 +41,12 @@ export const useJobs = () => {
     return data.data
   }, [])
 
+  const updateJob = useCallback(async (id: string, jobData: Omit<IJob, '_id' | 'recruiterId' | 'recruiterName' | 'isActive' | 'createdAt' | 'updatedAt'>) => {
+    const { data } = await api.put<{ data: IJob }>(`/jobs/${id}`, jobData)
+    dispatch(setSelectedJob(data.data))
+    return data.data
+  }, [dispatch])
+
   const deleteJob = useCallback(async (id: string) => {
     await api.delete(`/jobs/${id}`)
     await fetchJobs()
@@ -58,5 +64,6 @@ export const useJobs = () => {
     fetchJobById,
     createJob,
     deleteJob,
+    updateJob,
   }
 }
