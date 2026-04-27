@@ -8,19 +8,53 @@ if (!process.env.MONGO_URI) {
 
 const client = new MongoClient(process.env.MONGO_URI);
 const db = client.db();
+import { env } from './env';
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
+  baseURL: env.BETTER_AUTH_URL,
+  secret: env.BETTER_AUTH_SECRET,
+
+  trustedOrigins: [
+    env.CLIENT_URL, // "http://localhost:5173"
+  ],
+  
   emailAndPassword: {
     enabled: true,
+    minPasswordLength: 8,
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
   },
+  
+  user: {
+    additionalFields: {
+      role: {
+        type: 'string',
+        defaultValue: 'seeker',         // 'seeker' | 'recruiter'
+        input: true,                    // allow client to send this on signup
+      },
+    },
+  },
+
+  session: {
+    // additionalFields: { // Additional fields for the session table
+		// 	role: {
+    //     type: 'string',
+    //     defaultValue: 'seeker',         // 'seeker' | 'recruiter'
+    //     input: true,                    // allow client to send this on signup
+    //   }
+		// },
+    expiresIn: 60 * 60 * 24 * 7,       // 7 days
+    updateAge: 60 * 60 * 24,           // refresh session if older than 1 day
+  },
 })
+
+export type Session = typeof auth.$Infer.Session
+export type User = typeof auth.$Infer.Session.user

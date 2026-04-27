@@ -1,11 +1,26 @@
-export const apiResponse = {
-  success: (data: unknown, message = 'Success') => ({
+import type { Response } from 'express'
+
+export const sendSuccess = (
+  res: Response,
+  data: unknown,
+  message = 'Success',
+  statusCode = 200
+) => {
+  res.status(statusCode).json({
     success: true,
     message,
     data,
-  }),
-  error: (message = 'Something went wrong') => ({
+  })
+}
+
+export const sendError = (
+  res: Response,
+  message = 'Something went wrong',
+  statusCode = 500
+) => {
+  res.status(statusCode).json({
     success: false,
     message,
-  }),
+    data: null,
+  })
 }

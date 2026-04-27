@@ -1,12 +1,10 @@
-export type Role = 'seeker' | 'recruiter'
-
 export interface User {
   id: string
   name: string
   email: string
   emailVerified: boolean
   image?: string | null
-  role: Role
+  role: 'seeker' | 'recruiter'
   createdAt: Date
   updatedAt: Date
 }
@@ -16,10 +14,6 @@ export interface Session {
   userId: string
   expiresAt: Date
   token: string
-}
-
-export interface ApiResponse<T = null> {
-  success: boolean
-  message: string
-  data: T
+  ipAddress?: string | null
+  userAgent?: string | null
 }
