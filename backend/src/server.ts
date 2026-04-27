@@ -5,6 +5,7 @@ import { connectDB } from './config/db'
 import { auth } from './config/auth'
 import { toNodeHandler } from 'better-auth/node'
 import { errorHandler } from './middleware/error.middleware'
+import jobsRouter from './modules/jobs/jobs.routes'
 
 const app = express()
 const PORT = env.PORT ?? 5000
@@ -29,6 +30,8 @@ app.all('/api/auth/{*any}', toNodeHandler(auth));
 app.get('/api/health', (_req, res) => {
   res.json({ success: true, message: 'Server is running', data: null })
 })
+
+app.use('/api/jobs', jobsRouter)       // Job router
 
 // Your API routes go here
 // app.use('/api/jobs', jobsRouter)
