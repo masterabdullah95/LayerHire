@@ -7,14 +7,14 @@ export interface User {
   emailVerified: boolean
   image?: string | null
   role: Role
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Session {
   id: string
   userId: string
-  expiresAt: Date
+  expiresAt: string
   token: string
 }
 

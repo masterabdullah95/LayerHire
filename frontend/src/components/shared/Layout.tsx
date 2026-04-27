@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main >
+      <main className='mt-4 mx-14'>
         <Outlet />
       </main>
     </div>

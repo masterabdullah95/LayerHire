@@ -53,6 +53,13 @@ const Navbar = () => {
           >
             Browse Jobs
           </Link>
+          
+          {isAuthenticated && !isRecruiter && (
+            <Link to="/my-applications" className="transition-colors hover:text-foreground">
+              My Applications
+            </Link>
+          )}
+
           {isRecruiter && (
             <Link
               to="/post-job"

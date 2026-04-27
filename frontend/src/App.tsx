@@ -3,33 +3,36 @@ import Layout from '@/components/shared/Layout'
 import ProtectedRoute from './components/shared/ProtectedRoute.tsx'
 import LoginPage from './features/auth/LoginPage.tsx'
 import RegisterPage from './features/auth/RegisterPage.tsx'
+import JobsPage from '@/pages/JobsPage'
+import JobDetailPage from '@/pages/JobDetailPage'
+import PostJobPage from '@/pages/PostJobPage'
+import DashboardPage from '@/pages/DashboardPage'
+import MyApplicationsPage from '@/pages/MyApplicationsPage'
 
 // Pages (placeholders for now — built in later phases)
-const HomePage = () => <div className="p-8 text-2xl font-medium">Home — Phase 2</div>
-const DashboardPage = () => <div className="p-8 text-2xl font-medium">Dashboard</div>
-const PostJobPage = () => <div className="p-8 text-2xl font-medium">Post a Job</div>
-const ProfilePage = () => <div className="text-2xl font-medium">Profile</div>
+const ProfilePage = () => <div className="text-2xl font-medium">Profile — coming soon</div>
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        
 
         {/* All pages with Navbar */}
         <Route element={<Layout />}>
 
-        {/* Auth pages — no navbar */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+          {/* Auth pages — no navbar */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
           {/* Public */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<JobsPage />} />
+          <Route path="/jobs/:id" element={<JobDetailPage />} />
 
           {/* Protected — any logged-in user */}
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/my-applications" element={<MyApplicationsPage />} />
           </Route>
 
           {/* Protected — recruiters only */}

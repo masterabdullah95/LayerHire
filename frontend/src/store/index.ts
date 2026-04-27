@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import authReducer from '../features/auth/auth.slice'
+import jobsReducer from '@/features/jobs/jobs.slice'
+import applicationsReducer from '@/features/applications/applications.slice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    jobs: jobsReducer,
+    applications: applicationsReducer,
   },
 })
 

@@ -14,18 +14,14 @@ export interface IApplication {
   seekerEmail: string
   recruiterId: string
   coverLetter: string
-  resumeUrl?: string
+  resumeUrl?: string | null
   status: ApplicationStatus
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }
 
 export interface CreateApplicationDTO {
   jobId: string
   coverLetter: string
   resumeUrl?: string
-}
-
-export interface UpdateApplicationStatusDTO {
-  status: ApplicationStatus
 }
