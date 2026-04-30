@@ -1,5 +1,6 @@
-import { Job } from './jobs.model.ts'
+import { Job } from './jobs.model'
 import type { CreateJobDTO, UpdateJobDTO, JobFilters } from './jobs.types.ts'
+import type { SortOrder } from 'mongoose'
 
 export const jobsService = {
 
@@ -9,25 +10,38 @@ export const jobsService = {
       type,
       experienceLevel,
       location,
+      salaryMin,
+      salaryMax,
+      sortBy = 'newest',
       page = 1,
       limit = 10,
     } = filters
 
     const query: Record<string, unknown> = { isActive: true }
 
-    if (search) {
-      query.$text = { $search: search }
-    }
-
+    if (search) query.$text = { $search: search }
     if (type) query.type = type
     if (experienceLevel) query.experienceLevel = experienceLevel
     if (location) query.location = { $regex: location, $options: 'i' }
+
+    if (salaryMin !== undefined || salaryMax !== undefined) {
+      query.salaryMin = {}
+      if (salaryMin !== undefined) (query.salaryMin as Record<string, number>).$gte = salaryMin
+      if (salaryMax !== undefined) (query.salaryMin as Record<string, number>).$lte = salaryMax
+    }
+
+    const sortMap: Record<string, Record<string, SortOrder>> = {
+      newest:      { createdAt: -1 },
+      oldest:      { createdAt: 1 },
+      salary_asc:  { salaryMin: 1 },
+      salary_desc: { salaryMin: -1 },
+    }
 
     const skip = (page - 1) * limit
 
     const [jobs, total] = await Promise.all([
       Job.find(query)
-        .sort({ createdAt: -1 })
+        .sort(sortMap[sortBy])
         .skip(skip)
         .limit(limit)
         .lean(),

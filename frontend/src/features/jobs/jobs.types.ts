@@ -24,6 +24,9 @@ export interface JobFilters {
   type?: JobType
   experienceLevel?: ExperienceLevel
   location?: string
+  salaryMin?: number
+  salaryMax?: number
+  sortBy?: 'newest' | 'oldest' | 'salary_asc' | 'salary_desc'
   page?: number
   limit?: number
 }

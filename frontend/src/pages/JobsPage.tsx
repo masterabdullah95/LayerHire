@@ -5,11 +5,13 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Search, X } from 'lucide-react'
-import type { JobType, ExperienceLevel } from '@/features/jobs/jobs.types'
 
 const JobsPage = () => {
   const { jobs, total, totalPages, isLoading, filters, fetchJobs } = useJobs()
   const [search, setSearch] = useState('')
+  const [location, setLocation] = useState('')
+  const [salaryMin, setSalaryMin] = useState('')
+  const [salaryMax, setSalaryMax] = useState('')
 
   useEffect(() => {
     fetchJobs()
@@ -26,7 +28,32 @@ const JobsPage = () => {
 
   const handleClearFilters = () => {
     setSearch('')
-    fetchJobs({ search: undefined, type: undefined, experienceLevel: undefined, page: 1 })
+    setLocation('')
+    setSalaryMin('')
+    setSalaryMax('')
+    fetchJobs({
+      search: undefined,
+      type: undefined,
+      experienceLevel: undefined,
+      location: undefined,
+      salaryMin: undefined,
+      salaryMax: undefined,
+      sortBy: undefined,
+      page: 1,
+    })
+  }
+
+  const handleLocationSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    fetchJobs({ location: location.trim() || undefined, page: 1 })
+  }
+
+  const handleSalaryFilter = () => {
+    fetchJobs({
+      salaryMin: salaryMin ? Number(salaryMin) : undefined,
+      salaryMax: salaryMax ? Number(salaryMax) : undefined,
+      page: 1,
+    })
   }
 
   const handlePageChange = (newPage: number) => {
@@ -43,7 +70,7 @@ const JobsPage = () => {
         <p className="text-muted-foreground mt-1">{total} jobs available</p>
       </div>
 
-      {/* Search + Filters */}
+      {/* Row 1 — Search + Sort + Clear */}
       <div className="flex flex-col gap-3 sm:flex-row">
         <form onSubmit={handleSearch} className="flex flex-1 gap-2">
           <div className="relative flex-1">
@@ -59,30 +86,15 @@ const JobsPage = () => {
         </form>
 
         <div className="flex gap-2">
-          <Select onValueChange={(v) => handleFilter('type', v)}>
-            <SelectTrigger className="w-36">
-              <SelectValue placeholder="Job type" />
+          <Select onValueChange={(v) => handleFilter('sortBy', v)}>
+            <SelectTrigger className="w-40">
+              <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All types</SelectItem>
-              <SelectItem value="full-time">Full-time</SelectItem>
-              <SelectItem value="part-time">Part-time</SelectItem>
-              <SelectItem value="contract">Contract</SelectItem>
-              <SelectItem value="internship">Internship</SelectItem>
-              <SelectItem value="remote">Remote</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Select onValueChange={(v) => handleFilter('experienceLevel', v)}>
-            <SelectTrigger className="w-36">
-              <SelectValue placeholder="Experience" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All levels</SelectItem>
-              <SelectItem value="entry">Entry</SelectItem>
-              <SelectItem value="mid">Mid</SelectItem>
-              <SelectItem value="senior">Senior</SelectItem>
-              <SelectItem value="lead">Lead</SelectItem>
+              <SelectItem value="newest">Newest first</SelectItem>
+              <SelectItem value="oldest">Oldest first</SelectItem>
+              <SelectItem value="salary_asc">Salary: Low → High</SelectItem>
+              <SelectItem value="salary_desc">Salary: High → Low</SelectItem>
             </SelectContent>
           </Select>
 
@@ -91,6 +103,70 @@ const JobsPage = () => {
           </Button>
         </div>
       </div>
+
+      {/* Row 2 — Type + Experience + Location + Salary */}
+      <div className="flex flex-wrap gap-2">
+        <Select onValueChange={(v) => handleFilter('type', v)}>
+          <SelectTrigger className="w-36">
+            <SelectValue placeholder="Job type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All types</SelectItem>
+            <SelectItem value="full-time">Full-time</SelectItem>
+            <SelectItem value="part-time">Part-time</SelectItem>
+            <SelectItem value="contract">Contract</SelectItem>
+            <SelectItem value="internship">Internship</SelectItem>
+            <SelectItem value="remote">Remote</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select onValueChange={(v) => handleFilter('experienceLevel', v)}>
+          <SelectTrigger className="w-36">
+            <SelectValue placeholder="Experience" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All levels</SelectItem>
+            <SelectItem value="entry">Entry</SelectItem>
+            <SelectItem value="mid">Mid</SelectItem>
+            <SelectItem value="senior">Senior</SelectItem>
+            <SelectItem value="lead">Lead</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {/* Location */}
+        <form onSubmit={handleLocationSearch} className="flex gap-1">
+          <Input
+            placeholder="Location..."
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-36"
+          />
+          <Button type="submit" variant="outline" size="sm" className="h-9">Go</Button>
+        </form>
+
+        {/* Salary range */}
+        <div className="flex items-center gap-1">
+          <Input
+            type="number"
+            placeholder="Min $"
+            value={salaryMin}
+            onChange={(e) => setSalaryMin(e.target.value)}
+            className="w-24"
+          />
+          <span className="text-muted-foreground text-sm">—</span>
+          <Input
+            type="number"
+            placeholder="Max $"
+            value={salaryMax}
+            onChange={(e) => setSalaryMax(e.target.value)}
+            className="w-24"
+          />
+          <Button type="button" variant="outline" size="sm" className="h-9" onClick={handleSalaryFilter}>
+            Apply
+          </Button>
+        </div>
+      </div>
+
 
       {/* Jobs Grid */}
       {isLoading ? (
