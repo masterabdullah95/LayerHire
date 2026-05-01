@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Briefcase, LogOut, LayoutDashboard, PlusCircle, User } from 'lucide-react'
+import { Briefcase, Search, CirclePlus, ClipboardList, LogOut, LayoutDashboard, PlusCircle, User } from 'lucide-react'
 
 const Navbar = () => {
   const { user, isAuthenticated, isRecruiter } = useAuth()
@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-6 sm:px-6 lg:px-14">
 
         {/* Logo */}
         <Link
@@ -42,38 +42,42 @@ const Navbar = () => {
           className="flex items-center gap-2 font-semibold text-lg"
         >
           <Briefcase className="h-5 w-5 text-primary" />
-          <span>JobBoard</span>
+          <span>LayerHire</span>
         </Link>
 
         {/* Center Nav Links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-10 text-sm text-muted-foreground">
           <Link
             to="/"
-            className="transition-colors hover:text-foreground"
+            className="flex gap-2 transition-colors hover:text-foreground"
           >
-            Browse Jobs
+            <Search className="h-5 w-5 text-primary" />
+            <span>Browse Jobs</span>
           </Link>
           
           {isAuthenticated && !isRecruiter && (
-            <Link to="/my-applications" className="transition-colors hover:text-foreground">
-              My Applications
+            <Link to="/my-applications" className="flex gap-2 transition-colors hover:text-foreground">
+              <ClipboardList className="h-5 w-5 text-primary" />
+              <span>My Applications</span>
             </Link>
           )}
 
           {isRecruiter && (
             <Link
               to="/post-job"
-              className="transition-colors hover:text-foreground"
+              className="flex gap-2 transition-colors hover:text-foreground"
             >
-              Post a Job
+              <CirclePlus className="h-5 w-5 text-primary"/>
+              <span>Post a Job</span>
             </Link>
           )}
           {isAuthenticated && (
             <Link
               to="/dashboard"
-              className="transition-colors hover:text-foreground"
+              className="flex gap-2 transition-colors hover:text-foreground"
             >
-              Dashboard
+              <LayoutDashboard className="h-5 w-5 text-primary"/>
+              <span> Dashboard</span>
             </Link>
           )}
         </nav>
