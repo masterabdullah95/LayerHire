@@ -8,6 +8,8 @@ import JobDetailPage from '@/pages/JobDetailPage'
 import PostJobPage from '@/pages/PostJobPage'
 import DashboardPage from '@/pages/DashboardPage'
 import MyApplicationsPage from '@/pages/MyApplicationsPage'
+import ContactPage from './pages/ContactPage.tsx'
+import CareersPage from './pages/CareersPage.tsx'
 
 // Pages (placeholders for now — built in later phases)
 const ProfilePage = () => <div className="text-2xl font-medium">Profile — coming soon</div>
@@ -27,6 +29,8 @@ const App = () => {
           {/* Public */}
           <Route path="/" element={<JobsPage />} />
           <Route path="/jobs/:id" element={<JobDetailPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/careers" element={<CareersPage />} />
 
           {/* Protected — any logged-in user */}
           <Route element={<ProtectedRoute />}>

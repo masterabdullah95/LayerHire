@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import { applicationsService } from './applications.service'
-import { sendSuccess, sendError } from '../../utils/apiResponse'
+import { sendSuccess } from '../../utils/apiResponse'
 import { asyncHandler } from '../../utils/asyncHandler'
 
 export const applicationsController = {

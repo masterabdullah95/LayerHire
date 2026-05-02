@@ -32,7 +32,7 @@ app.get('/api/health', (_req, res) => {
   res.json({ success: true, message: 'Server is running', data: null })
 })
 
-app.use('/api/jobs', jobsRouter)       // Job router
+app.use('/api/jobs', jobsRouter)       // ← Job router
 app.use('/api/applications', applicationsRouter)   // ← Applications router
 
 // Your API routes go here

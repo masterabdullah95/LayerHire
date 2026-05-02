@@ -36,7 +36,8 @@ A production-grade job board application built with the MERN stack and modern to
 ### Job Seekers
 
 - Browse and search all active job listings
-- Filter by job type, experience level, and location
+- Filter by job title, type, experience level, salary, and location
+- Sort by newest, oldest, salary high and low
 - View full job details with requirements and salary range
 - Apply with a cover letter — one application per job enforced
 - Track all applications and their status in real time

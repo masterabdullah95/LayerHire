@@ -50,8 +50,8 @@ const Footer = () => {
             <div className="flex flex-col gap-3">
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About Us</a>
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Careers</a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+              <Link to="/careers" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Careers</Link>
+              <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
             </div>
           </div>
 

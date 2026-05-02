@@ -2,11 +2,7 @@ import { betterAuth } from 'better-auth'
 import { MongoClient } from "mongodb"
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
-if (!process.env.MONGO_URI) {
-  throw new Error("MONGO_URI is not defined in environment variables");
-}
-
-const client = new MongoClient(process.env.MONGO_URI);
+const client = new MongoClient(process.env.MONGO_URI!);
 const db = client.db();
 import { env } from './env';
 
