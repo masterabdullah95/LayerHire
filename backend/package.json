@@ -13,6 +13,7 @@
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/multer": "^2.1.0",
     "@types/node": "^25.6.0"
   },
   "peerDependencies": {
@@ -20,11 +21,13 @@
   },
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.6.9",
+    "@supabase/supabase-js": "^2.105.1",
     "bcryptjs": "^3.0.3",
     "better-auth": "^1.6.9",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.5.0"
+    "mongoose": "^9.5.0",
+    "multer": "^2.1.1"
   }
 }

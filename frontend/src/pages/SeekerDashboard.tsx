@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import { useApplications } from '@/hooks/useApplications'
 import { useAuth } from '@/hooks/useAuth'
-import { Building2, Users, Clock, XCircle } from 'lucide-react'
+import { Building2, Users, Clock, UserCircle } from 'lucide-react'
 import type { ApplicationStatus } from '@/features/applications/applications.types'
+import ResumeUpload from '@/components/shared/ResumeUpload'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 const statusStyles: Record<ApplicationStatus, string> = {
   pending:   'bg-yellow-100 text-yellow-800',
@@ -16,10 +19,9 @@ const SeekerDashboard = () => {
   const { myApplications, fetchMyApplications } = useApplications()
 
   useEffect(() => {
-    fetchMyApplications()                          // ✅ seeker's own endpoint
+    fetchMyApplications()
   }, [])
 
-  // Derive stats from myApplications — no separate fetchStats needed
   const stats = {
     total:     myApplications.length,
     pending:   myApplications.filter(a => a.status === 'pending').length,
@@ -53,6 +55,37 @@ const SeekerDashboard = () => {
           </div>
         ))}
       </div>
+
+      {/* Profile & Resume */}
+      <Card>
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-2">
+            <UserCircle className="h-5 w-5 text-muted-foreground" />
+            <CardTitle className="text-base font-medium">Profile</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          {/* Basic info */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-1">
+              <p className="text-xs text-muted-foreground">Full name</p>
+              <p className="text-sm font-medium">{user?.name}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs text-muted-foreground">Email address</p>
+              <p className="text-sm font-medium">{user?.email}</p>
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Resume upload */}
+          <ResumeUpload
+            onUpload={(url) => console.log('Resume uploaded:', url)}
+            onDelete={() => console.log('Resume removed')}
+          />
+        </CardContent>
+      </Card>
 
       {/* Applications list */}
       <div className="space-y-4">

@@ -7,6 +7,7 @@ import { toNodeHandler } from 'better-auth/node'
 import { errorHandler } from './middleware/error.middleware'
 import jobsRouter from './modules/jobs/jobs.routes'
 import applicationsRouter from './modules/applications/applications.routes'
+import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
 
 const app = express()
 const PORT = env.PORT ?? 5000
@@ -34,10 +35,7 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/jobs', jobsRouter)       // ← Job router
 app.use('/api/applications', applicationsRouter)   // ← Applications router
-
-// Your API routes go here
-// app.use('/api/jobs', jobsRouter)
-// app.use('/api/applications', applicationsRouter)
+app.use('/api/resume', resumeRouter)   // ← Phase 5
 
 // ── Global Error Handler (always last) ───────────────
 app.use(errorHandler)
