@@ -10,6 +10,10 @@ import DashboardPage from '@/pages/DashboardPage'
 import MyApplicationsPage from '@/pages/MyApplicationsPage'
 import ContactPage from './pages/ContactPage.tsx'
 import CareersPage from './pages/CareersPage.tsx'
+import AboutPage from './pages/AboutPage.tsx'
+import BlogPage from './pages/BlogPage.tsx'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage.tsx'
+import TermsOfServicePage from './pages/TermsOfServicePage.tsx'
 
 // Pages (placeholders for now — built in later phases)
 const ProfilePage = () => <div className="text-2xl font-medium">Profile — coming soon</div>
@@ -31,6 +35,10 @@ const App = () => {
           <Route path="/jobs/:id" element={<JobDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/careers" element={<CareersPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsOfServicePage />} />
 
           {/* Protected — any logged-in user */}
           <Route element={<ProtectedRoute />}>

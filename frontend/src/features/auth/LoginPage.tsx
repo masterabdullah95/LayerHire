@@ -54,7 +54,7 @@ const LoginPage = () => {
           {/* Google OAuth */}
           <Button
             variant="outline"
-            className="w-full"
+            className="w-full cursor-pointer"
             onClick={handleGoogle}
           >
             <img src="/google.svg" className="mr-2 h-4 w-4" alt="" />
@@ -102,7 +102,7 @@ const LoginPage = () => {
               <p className="text-sm text-destructive">{error}</p>
             )}
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="cursor-pointer w-full" disabled={isLoading}>
               {isLoading ? 'Signing in...' : 'Sign in'}
             </Button>
           </form>

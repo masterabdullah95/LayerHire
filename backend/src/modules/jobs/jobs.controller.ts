@@ -12,9 +12,9 @@ export const jobsController = {
       type: req.query.type as JobFilters['type'],
       experienceLevel: req.query.experienceLevel as JobFilters['experienceLevel'],
       location: req.query.location as string,
-      sortBy: (req.query.sortBy as JobFilters['sortBy']) || 'newest', // ✅ added
-      salaryMin: req.query.salaryMin ? Number(req.query.salaryMin) : undefined, // ✅ added
-      salaryMax: req.query.salaryMax ? Number(req.query.salaryMax) : undefined, // ✅ added
+      sortBy: (req.query.sortBy as JobFilters['sortBy']) || 'newest', 
+      salaryMin: req.query.salaryMin ? Number(req.query.salaryMin) : undefined, 
+      salaryMax: req.query.salaryMax ? Number(req.query.salaryMax) : undefined, 
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 10,
     }

@@ -100,7 +100,7 @@ const RegisterPage = () => {
                     key={r}
                     type="button"
                     onClick={() => setForm((prev) => ({ ...prev, role: r }))}
-                    className={`rounded-lg border px-4 py-3 text-sm font-medium capitalize transition-all
+                    className={`cursor-pointer rounded-lg border px-4 py-3 text-sm font-medium capitalize transition-all
                       ${form.role === r
                         ? 'border-primary bg-primary text-primary-foreground'
                         : 'border-border bg-background text-muted-foreground hover:border-primary'
@@ -116,7 +116,7 @@ const RegisterPage = () => {
               <p className="text-sm text-destructive">{error}</p>
             )}
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="cursor-pointer w-full" disabled={isLoading}>
               {isLoading ? 'Creating account...' : 'Create account'}
             </Button>
 

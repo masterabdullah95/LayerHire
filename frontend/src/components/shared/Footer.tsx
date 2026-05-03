@@ -48,8 +48,8 @@ const Footer = () => {
           <div>
             <p className="text-sm font-medium mb-4">Company</p>
             <div className="flex flex-col gap-3">
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About Us</a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+              <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About Us</Link>
+              <Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</Link>
               <Link to="/careers" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Careers</Link>
               <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
             </div>
@@ -81,8 +81,8 @@ const Footer = () => {
         <div className="border-t pt-5 flex flex-col sm:flex-row justify-between items-center gap-3">
           <p className="text-xs text-muted-foreground">© 2026 LayerHire. All rights reserved.</p>
           <div className="flex gap-5">
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
