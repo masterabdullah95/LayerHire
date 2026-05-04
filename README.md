@@ -41,6 +41,7 @@ A production-grade job board application built with the MERN stack and modern to
 - View full job details with requirements and salary range
 - Apply with a cover letter — one application per job enforced
 - Track all applications and their status in real time
+- Can upload resume
 
 ### Recruiters
 
@@ -67,8 +68,8 @@ A production-grade job board application built with the MERN stack and modern to
 | Technology            | Purpose                      |
 | --------------------- | ---------------------------- |
 | React 19 + TypeScript | UI framework                 |
-| Vite                  | Build tool and dev server    |
-| React Router v6       | Client-side routing          |
+| Vite + Bun            | Build tool and dev server    |
+| React Router v7       | Client-side routing          |
 | Redux Toolkit         | Global state management      |
 | TailwindCSS v4        | Utility-first styling        |
 | Shadcn/ui + Radix     | Accessible component library |
@@ -98,7 +99,7 @@ A production-grade job board application built with the MERN stack and modern to
 ## Project Structure
 
 ```
-job-board/
+LayerHire/
 ├── backend/                        # Express + TypeScript API server
 │   └── src/
 │       ├── config/                 # DB connection, env config, Firebase/Supabase init, Better Auth
