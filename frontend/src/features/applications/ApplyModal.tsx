@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
+import { getResumeUrl } from '@/lib/resume.api'
 
 interface Props {
   jobId: string
@@ -48,7 +49,8 @@ const ApplyModal = ({ jobId, jobTitle, company, open, onClose }: Props) => {
     setError('')
 
     try {
-      await applyToJob({ jobId, coverLetter })
+      const resumeUrl = (await getResumeUrl()) ?? "";
+      await applyToJob({ jobId, coverLetter, resumeUrl })
       setSuccess(true)
     } catch (err: unknown) {
       const message =

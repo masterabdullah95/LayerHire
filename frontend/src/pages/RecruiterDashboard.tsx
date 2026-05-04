@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Building2, Users, Clock } from 'lucide-react'
+import { Building2, Users, Clock, FileText } from 'lucide-react'
 import type { ApplicationStatus } from '@/features/applications/applications.types'
 
 const statusStyles: Record<ApplicationStatus, string> = {
@@ -91,6 +91,7 @@ const RecruiterDashboard = () => {
                 <tr>
                   <th className="text-left px-4 py-3 font-medium text-muted-foreground">Applicant</th>
                   <th className="text-left px-4 py-3 font-medium text-muted-foreground">Job</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Resume</th>
                   <th className="text-left px-4 py-3 font-medium text-muted-foreground">Applied</th>
                   <th className="text-left px-4 py-3 font-medium text-muted-foreground">Status</th>
                   <th className="text-left px-4 py-3 font-medium text-muted-foreground">Action</th>
@@ -104,6 +105,15 @@ const RecruiterDashboard = () => {
                       <p className="text-muted-foreground text-xs">{app.seekerEmail}</p>
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">{app.jobTitle}</td>
+                    <td className="px-4 py-3">
+                        <a href={app.resumeUrl ?? "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                        <FileText className="w-4 h-4" />
+                        View Resume
+                      </a>
+                    </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {new Date(app.createdAt).toLocaleDateString()}
                     </td>

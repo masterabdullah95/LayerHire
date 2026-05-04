@@ -40,7 +40,7 @@ const applicationSchema = new Schema<IApplicationDocument>(
       required: [true, 'Cover letter is required'],
       maxlength: [2000, 'Cover letter cannot exceed 2000 characters'],
     },
-    resumeUrl: {
+    resumeUrl: { // Stores the Supabase public URL of the seeker's uploaded resume
       type: String,
       default: null,
     },

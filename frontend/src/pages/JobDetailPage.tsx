@@ -122,6 +122,7 @@ const JobDetailPage = () => {
             Sign in to apply
           </Button>
         )}
+        
         {isSeeker && (
           <Button className='cursor-pointer' size="lg" disabled={hasApplied} onClick={() => setApplyOpen(true)}>
             {hasApplied ? 'Already applied' : 'Apply for this position'}

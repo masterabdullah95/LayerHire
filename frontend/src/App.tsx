@@ -15,6 +15,7 @@ import BlogPage from './pages/BlogPage.tsx'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.tsx'
 import TermsOfServicePage from './pages/TermsOfServicePage.tsx'
 import ResumeUpload from './components/shared/ResumeUpload.tsx'
+import ProfilePage from './pages/ProfilePage.tsx'
 
 const App = () => {
   return (
@@ -40,7 +41,7 @@ const App = () => {
 
           {/* Protected — any logged-in user */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/profile" element={<ResumeUpload />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/my-applications" element={<MyApplicationsPage />} />
           </Route>

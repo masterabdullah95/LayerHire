@@ -39,15 +39,15 @@ A production-grade job board application built with the MERN stack and modern to
 - Filter by job title, type, experience level, salary, and location
 - Sort by newest, oldest, salary high and low
 - View full job details with requirements and salary range
-- Apply with a cover letter — one application per job enforced
+- Can upload resume on profile page
+- Apply with a cover letter, CV attach automatically — one application per job enforced
 - Track all applications and their status in real time
-- Can upload resume
 
 ### Recruiters
 
 - Post new job listings with full details and skill tags
 - Manage all posted jobs (edit, delete, toggle active)
-- View all incoming applications in a dashboard
+- View all incoming applications in a dashboard along with CVs
 - Update application status — pending, reviewing, accepted, rejected
 - Application stats overview with live counts
 

@@ -4,7 +4,14 @@ import { sendSuccess } from '../../utils/apiResponse'
 import { asyncHandler } from '../../utils/asyncHandler'
 
 export const applicationsController = {
-
+  /**
+   * POST /api/applications
+   * Body: { jobId, coverLetter?, resumeUrl }
+   * Auth: seeker
+   *
+   * The frontend should upload the resume to Supabase first via
+   * /api/resume/upload, then pass the returned publicUrl here as resumeUrl.
+   */
   apply: asyncHandler(async (req: Request, res: Response) => {
     const application = await applicationsService.apply(
       req.body,

@@ -6,7 +6,11 @@ import type {
 } from './applications.types.ts'
 
 export const applicationsService = {
-
+  /**
+   * Seeker applies to a job.
+   * resumeUrl is stored directly on the application document so
+   * recruiters can access it later without a separate resume lookup.
+   */
   async apply(
     data: CreateApplicationDTO,
     seekerId: string,
@@ -38,7 +42,9 @@ export const applicationsService = {
     return application
   },
 
-  // Seeker — get all my applications
+  /**
+   * Seeker views their own applications.
+   */
   async getSeekerApplications(seekerId: string) {
     const applications = await Application.find({ seekerId })
       .sort({ createdAt: -1 })

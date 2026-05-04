@@ -53,6 +53,7 @@ export const useApplications = () => {
   }, [dispatch])
 
   const applyToJob = useCallback(
+    
     async (applicationData: CreateApplicationDTO) => {
       const { data } = await api.post('/applications', applicationData)
       return data.data
