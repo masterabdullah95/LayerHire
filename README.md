@@ -259,6 +259,10 @@ FIREBASE_CLIENT_EMAIL=your_client_email
 
 **Frontend** — create `frontend/.env`:
 
+```bash
+cp .env.example frontend/.env
+```
+
 ```env
 VITE_API_URL=http://localhost:3000
 VITE_APP_URL=http://localhost:5173
@@ -277,10 +281,10 @@ VITE_APP_URL=http://localhost:5173
 
 ```bash
 # Terminal 1 — start the backend
-cd backend && bun --watch src/server.ts
+cd backend && bun dev
 
 # Terminal 2 — start the frontend
-cd frontend && bun run dev
+cd frontend && bun dev
 ```
 
 | Service      | URL                              |
@@ -397,7 +401,7 @@ docker-compose down -v
 - [x] Phase 2 — Jobs module (CRUD + search + filters + pagination)
 - [x] Phase 3 — Applications module (apply, track, recruiter dashboard)
 - [ ] Phase 4 — Docker (containerize frontend + backend + MongoDB)
-- [ ] Phase 5 — Supabase (resume PDF uploads)
+- [x] Phase 5 — Supabase (resume PDF/docx uploads)
 - [ ] Phase 6 — Firebase (push notifications on status change)
 - [ ] Phase 7 — Deployment (Railway / Render)
 
