@@ -99,28 +99,32 @@ A production-grade job board application built with the MERN stack and modern to
 
 ```
 job-board/
-├── backend/
+├── backend/                        # Express + TypeScript API server
 │   └── src/
-│       ├── config/
+│       ├── config/                 # DB connection, env config, Firebase/Supabase init, Better Auth
 │       │   ├── auth.ts             # BetterAuth instance and config
 │       │   ├── db.ts               # MongoDB connection
-│       │   └── env.ts              # Environment variable validation
-│       ├── middleware/
-│       │   ├── protect.middleware.ts   # Auth guard + role guard
+│       │   ├── env.ts              # Environment variable validation
+│       │   └── supabase.ts         # Supabase initialization and config
+│       ├── middleware/             # Auth guards, error handlers, protected routes middlewares etc.
+│       │   ├── protect.middleware.ts   # Auth guard + role guard + protected routes middleware
 │       │   └── error.middleware.ts     # Global error handler
 │       ├── modules/
-│       │   ├── jobs/               # Job CRUD module
+│       │   ├── jobs/               # Job module
 │       │   │   ├── jobs.model.ts
 │       │   │   ├── jobs.types.ts
 │       │   │   ├── jobs.service.ts
 │       │   │   ├── jobs.controller.ts
 │       │   │   └── jobs.routes.ts
-│       │   └── applications/       # Applications module
-│       │       ├── applications.model.ts
-│       │       ├── applications.types.ts
-│       │       ├── applications.service.ts
-│       │       ├── applications.controller.ts
-│       │       └── applications.routes.ts
+│       │   ├── applications/       # Applications module
+│       │   │   ├── applications.model.ts
+│       │   │   ├── applications.types.ts
+│       │   │   ├── applications.service.ts
+│       │   │   ├── applications.controller.ts
+│       │   │   └── applications.routes.ts
+│       │   └── resume/             # Resume module
+│       │       ├── resume.controller.ts
+│       │       └── resume.routes.ts
 │       ├── utils/
 │       │   ├── asyncHandler.ts     # Async route wrapper
 │       │   └── apiResponse.ts      # Consistent response helpers
@@ -131,15 +135,53 @@ job-board/
 │       ├── components/
 │       │   ├── ui/                 # Shadcn generated components
 │       │   └── shared/             # Navbar, Layout, ProtectedRoute, JobCard
+│       │       ├── Footer.tsx
+│       │       ├── JobCard.tsx
+│       │       ├── Layout.tsx      # Main layout
+│       │       ├── Navbar.tsx
+│       │       ├── ProtectedRoute.tsx   # Protected layout
+│       │       └── ResumeUpload.tsx     # Resume upload component
 │       ├── features/
-│       │   ├── auth/               # Login, Register, auth slice
-│       │   ├── jobs/               # Jobs slice and types
-│       │   └── applications/       # ApplyModal, applications slice
+│       │   ├── auth/                    # Login, Register, auth slice
+│       │   │   ├── auth.slice.ts
+│       │   │   ├── LoginPage.tsx
+│       │   │   └── RegisterPage.tsx
+│       │   ├── jobs/                    # Jobs slice and types
+│       │   │   ├── EditJobModal.tsx
+│       │   │   ├── jobs.slice.ts
+│       │   │   └── jobs.types.ts
+│       │   └── applications/            # ApplyModal, applications slice
+│       │       ├── applications.slice.ts
+│       │       ├── applications.types.ts
+│       │       └── ApplyModal.ts
 │       ├── hooks/                  # useAuth, useJobs, useApplications
+│       │   ├── useApplications.ts
+│       │   ├── useAuth.ts
+│       │   └── useJobs.ts
 │       ├── lib/                    # Axios instance, auth client
+│       │   ├── auth-client.ts
+│       │   ├── axios.ts
+│       │   ├── resume.api.ts
+│       │   └── utils.ts
 │       ├── pages/                  # JobsPage, JobDetailPage, PostJobPage, etc.
+│       │   ├── AboutPage.tsx
+│       │   ├── BlogPage.tsx
+│       │   ├── CareersPage.tsx
+│       │   ├── ContactPage.tsx
+│       │   ├── DashboardPage.tsx
+│       │   ├── JobDetailPage.tsx
+│       │   ├── JobsPage.tsx
+│       │   ├── MyApplicationsPage.tsx
+│       │   ├── PostJobPage.tsx
+│       │   ├── PrivacyPolicyPage.tsx
+│       │   ├── RecruiterDashboard.tsx
+│       │   ├── SeekerDashboard.tsx
+│       │   └── TermsOfServicePage.tsx
 │       ├── store/                  # Redux store
+│       │   └── index.ts
 │       ├── types/                  # Shared TypeScript interfaces
+│       │   ├── auth.types.ts
+│       │   └── index.ts
 │       ├── App.tsx                 # Router setup
 │       └── main.tsx                # App entry point with providers
 │
