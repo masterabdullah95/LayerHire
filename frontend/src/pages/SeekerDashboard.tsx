@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useApplications } from '@/hooks/useApplications'
 import { useAuth } from '@/hooks/useAuth'
-import { Building2, Users, Clock, UserCircle } from 'lucide-react'
+import { Building2, Users, Clock } from 'lucide-react'
 import type { ApplicationStatus } from '@/features/applications/applications.types'
 
 const statusStyles: Record<ApplicationStatus, string> = {

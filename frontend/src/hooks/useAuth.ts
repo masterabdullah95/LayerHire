@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSession } from '../lib/auth-client.ts'
 import { setUser, clearUser } from '../features/auth/auth.slice.ts'
 import { useAppDispatch, useAppSelector } from '../store/index.ts'
-import type { User, Role } from '../types/index.ts'
+import type { Role } from '../types/index.ts'
 
 export const useAuth = () => {
   const dispatch = useAppDispatch()

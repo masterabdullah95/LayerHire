@@ -20,6 +20,7 @@ const RegisterPage = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    console.log(form);
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

@@ -14,7 +14,6 @@ import AboutPage from './pages/AboutPage.tsx'
 import BlogPage from './pages/BlogPage.tsx'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.tsx'
 import TermsOfServicePage from './pages/TermsOfServicePage.tsx'
-import ResumeUpload from './components/shared/ResumeUpload.tsx'
 import ProfilePage from './pages/ProfilePage.tsx'
 
 const App = () => {
