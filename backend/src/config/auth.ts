@@ -21,8 +21,9 @@ export const auth = betterAuth({
   ],
 
   cookie: {
-    secure: isProduction, // true only in production
+    secure: true, // true only in production
     sameSite: "lax", // or "strict" depending on needs
+    domain: ".up.railway.app",
   },
   
   emailAndPassword: {
