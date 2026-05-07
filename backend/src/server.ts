@@ -10,7 +10,7 @@ import applicationsRouter from './modules/applications/applications.routes'
 import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
 
 const app = express()
-const PORT = env.PORT ?? 5000
+const PORT: number = parseInt(env.PORT || '3000', 10);
 
 app.use(
   cors({
@@ -42,4 +42,5 @@ app.use(errorHandler)
 
 // ── Start ─────────────────────────────────────────────
 await connectDB()
-app.listen(PORT, () => console.log(`✓ Server running on http://localhost:${PORT}`))
+const HOST = env.HOST || '0.0.0.0';
+app.listen(PORT, HOST, () => console.log(`✓ Server running on http://localhost:${PORT}`))

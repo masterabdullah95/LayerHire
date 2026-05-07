@@ -7,7 +7,8 @@ const requiredEnvVars = [
   'GOOGLE_CLIENT_SECRET',
   'SUPABASE_URL',
   'SUPABASE_SERVICE_ROLE_KEY',
-  'NODE_ENV'
+  'NODE_ENV',
+  'HOST'
 ] as const
 
 for (const key of requiredEnvVars) {
@@ -17,6 +18,7 @@ for (const key of requiredEnvVars) {
 }
 
 export const env = {
+  HOST: process.env.HOST!,
   NODE_ENV: process.env.NODE_ENV!,
   MONGO_URI: process.env.MONGO_URI!,
   BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET!,
