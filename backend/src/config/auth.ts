@@ -6,6 +6,8 @@ const client = new MongoClient(process.env.MONGO_URI!);
 const db = client.db();
 import { env } from './env';
 
+const isProduction = env.NODE_ENV === "production";  // true only in production
+
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
@@ -17,6 +19,11 @@ export const auth = betterAuth({
   trustedOrigins: [
     env.CLIENT_URL, // "http://localhost:5173"
   ],
+
+  cookie: {
+    secure: isProduction, // true only in production
+    sameSite: "lax", // or "strict" depending on needs
+  },
   
   emailAndPassword: {
     enabled: true,
