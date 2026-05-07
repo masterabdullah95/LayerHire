@@ -18,14 +18,19 @@ export const auth = betterAuth({
 
   trustedOrigins: [
     env.CLIENT_URL, // "http://localhost:5173"
+    "https://layerhire.up.railway.app"
   ],
 
-  cookie: {
-    secure: true, // true only in production
-    sameSite: "none", // or "strict" depending on needs
-    httpOnly: true,
-    domain: "layerhire.up.railway.app",
-    path: "/",
+  sessionCookie: {
+    name: "__Secure-better-auth.session_token",
+    attributes: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+      domain: ".layerhire.up.railway.app", // ⭐ Try with dot
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days in seconds
+    }
   },
   
   emailAndPassword: {
