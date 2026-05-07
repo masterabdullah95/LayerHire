@@ -23,6 +23,7 @@ export const auth = betterAuth({
   cookie: {
     secure: true, // true only in production
     sameSite: "none", // or "strict" depending on needs
+    httpOnly: true,
     domain: ".up.railway.app",
   },
   
@@ -59,6 +60,8 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24,           // refresh session if older than 1 day
   },
 })
+
+console.log("✅ Better Auth initialized with sameSite: none");
 
 export type Session = typeof auth.$Infer.Session
 export type User = typeof auth.$Infer.Session.user
