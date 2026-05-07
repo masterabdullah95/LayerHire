@@ -22,7 +22,7 @@ export const auth = betterAuth({
 
   cookie: {
     secure: isProduction, // true only in production
-    sameSite: "lax", // or "strict" depending on needs
+    sameSite: "none", // or "strict" depending on needs
   },
   
   emailAndPassword: {
