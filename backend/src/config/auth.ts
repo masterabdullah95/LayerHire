@@ -27,7 +27,7 @@ export const auth = betterAuth({
       secure: true,
       httpOnly: true,
       sameSite: "none",
-      domain: ".layerhire.up.railway.app", // ⭐ Try with dot
+      domain: "layerhire.up.railway.app", // ⭐ Try with dot
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 7 days in seconds
     }
