@@ -1,6 +1,14 @@
 # Build stage
 FROM oven/bun:alpine AS build
 WORKDIR /app
+
+# Declare build argument
+ARG VITE_API_URL
+ARG VITE_APP_URL
+# Make it available to Vite during build
+ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_APP_URL=$VITE_APP_URL
+
 COPY package*.json bun.lock ./
 
 # Install dependencies with bun

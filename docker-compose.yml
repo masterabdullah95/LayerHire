@@ -1,0 +1,32 @@
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend-service
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL}   # Use at build time -> docker-compose up --build, picks variables from .env file from root, same location as this file
+        - VITE_APP_URL=${VITE_APP_URL}   # Use at build time -> docker-compose up --build, picks variables from .env file from root, same location as this file
+    container_name: frontend-service
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
