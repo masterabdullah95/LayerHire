@@ -10,12 +10,14 @@ import applicationsRouter from './modules/applications/applications.routes'
 import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
 
 const app = express()
+app.set('trust proxy', 1);
 const PORT: number = parseInt(env.PORT || '3000', 10);
 
 app.use(
   cors({
     origin: [
       env.CLIENT_URL ?? 'http://localhost:5173',
+      'https://layerhire.up.railway.app'
     ],
     // methods: ["GET", "POST", "PUT", "DELETE"], // allowed HTTP methods
     // allowedHeaders: ["Content-Type", "Authorization"],
@@ -43,4 +45,4 @@ app.use(errorHandler)
 // ── Start ─────────────────────────────────────────────
 await connectDB()
 const HOST = env.HOST || '0.0.0.0';
-app.listen(PORT, HOST, () => console.log(`✓ Server running on http://${HOST}:${PORT}`))
+app.listen(PORT, HOST, () => console.log(`✓ Server running on https://${HOST}:${PORT}`))
