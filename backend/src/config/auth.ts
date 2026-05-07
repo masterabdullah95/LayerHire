@@ -24,7 +24,8 @@ export const auth = betterAuth({
     secure: true, // true only in production
     sameSite: "none", // or "strict" depending on needs
     httpOnly: true,
-    domain: ".up.railway.app",
+    domain: "layerhire.up.railway.app",
+    path: "/",
   },
   
   emailAndPassword: {
