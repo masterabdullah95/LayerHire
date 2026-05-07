@@ -22,7 +22,7 @@ export const auth = betterAuth({
 
   cookie: {
     secure: true, // true only in production
-    sameSite: "lax", // or "strict" depending on needs
+    sameSite: "none", // or "strict" depending on needs
     domain: ".up.railway.app",
   },
   
