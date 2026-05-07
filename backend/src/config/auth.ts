@@ -16,23 +16,19 @@ export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
 
+  advanced: {
+		crossSubDomainCookies: {
+			enabled: true,
+			domain: ".up.railway.app", // Use leading dot or root domain
+		},
+		useSecureCookies: true, // Required for cross-domain
+	},
+
   trustedOrigins: [
     env.CLIENT_URL, // "http://localhost:5173"
     "https://layerhire.up.railway.app"
   ],
 
-  sessionCookie: {
-    name: "__Secure-better-auth.session_token",
-    attributes: {
-      secure: true,
-      httpOnly: true,
-      sameSite: "none",
-      domain: "layerhire.up.railway.app", // ⭐ Try with dot
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7, // 7 days in seconds
-    }
-  },
-  
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,

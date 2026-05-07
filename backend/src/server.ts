@@ -10,7 +10,6 @@ import applicationsRouter from './modules/applications/applications.routes'
 import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
 
 const app = express()
-app.set('trust proxy', 1);
 const PORT: number = parseInt(env.PORT || '3000', 10);
 
 app.use(
@@ -25,7 +24,7 @@ app.use(
   }),
 );
 
-app.use(express.json())
+
 
 // BetterAuth handles all /auth/* routes automatically
 app.all('/api/auth/{*any}', toNodeHandler(auth));
@@ -38,6 +37,8 @@ app.get('/api/health', (_req, res) => {
 app.use('/api/jobs', jobsRouter)       // ← Job router
 app.use('/api/applications', applicationsRouter)   // ← Applications router
 app.use('/api/resume', resumeRouter)   // ← Phase 5
+
+app.use(express.json())
 
 // ── Global Error Handler (always last) ───────────────
 app.use(errorHandler)
