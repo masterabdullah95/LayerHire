@@ -3,3 +3,9 @@ from = "/api/*"
 to = "https://layerhire-api.up.railway.app/api/:splat"
 status = 200
 force = true
+
+# Add headers forwarding
+headers = {
+	"X-Forwarded-Proto" = "https",
+	"X-Forwarded-Host" = "layerhire.up.railway.app"
+}

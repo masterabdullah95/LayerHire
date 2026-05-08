@@ -12,11 +12,14 @@ import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
 const app = express()
 const PORT: number = parseInt(env.PORT || '3000', 10);
 
+app.set('trust proxy', 1); // Trust first proxy
+
 app.use(
   cors({
     origin: [
       env.CLIENT_URL ?? 'http://localhost:5173',
-      'https://layerhire.up.railway.app'
+      'https://layerhire.up.railway.app',
+      'layerhire-api.up.railway.app'
     ],
     // methods: ["GET", "POST", "PUT", "DELETE"], // allowed HTTP methods
     // allowedHeaders: ["Content-Type", "Authorization"],
@@ -39,7 +42,6 @@ app.use('/api/applications', applicationsRouter)   // ← Applications router
 app.use('/api/resume', resumeRouter)   // ← Phase 5
 
 app.use(express.json())
-
 // ── Global Error Handler (always last) ───────────────
 app.use(errorHandler)
 

@@ -13,6 +13,9 @@ export const auth = betterAuth({
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
+  logger: {
+		level: "debug", // See all validation errors
+	},
   // baseURL: env.BETTER_AUTH_URL,
   // Dynamic baseURL since you're using a proxy
 	baseURL: {
@@ -22,6 +25,12 @@ export const auth = betterAuth({
 		],
 		protocol: "https",
 	},
+
+  advanced: {
+		disableOriginCheck: true, // Temporarily disable
+		disableCSRFCheck: true, // Temporarily disable
+	},
+
   secret: env.BETTER_AUTH_SECRET,
 
   trustedOrigins: [
