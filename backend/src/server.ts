@@ -27,8 +27,6 @@ app.use(
   }),
 );
 
-
-
 // BetterAuth handles all /auth/* routes automatically
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 
