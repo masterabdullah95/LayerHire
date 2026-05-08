@@ -13,11 +13,21 @@ export const auth = betterAuth({
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
-  baseURL: env.BETTER_AUTH_URL,
+  // baseURL: env.BETTER_AUTH_URL,
+  // Dynamic baseURL since you're using a proxy
+	baseURL: {
+		allowedHosts: [
+			"layerhire.up.railway.app",
+			"layerhire-api.up.railway.app",
+		],
+		protocol: "https",
+	},
   secret: env.BETTER_AUTH_SECRET,
 
   trustedOrigins: [
-    env.CLIENT_URL, // "http://localhost:5173"
+    // env.CLIENT_URL, // "http://localhost:5173"
+    "https://layerhire.up.railway.app",
+		"https://layerhire-api.up.railway.app",
   ],
 
   emailAndPassword: {
