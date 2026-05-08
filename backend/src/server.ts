@@ -42,6 +42,13 @@ app.use('/api/jobs', jobsRouter)       // ← Job router
 app.use('/api/applications', applicationsRouter)   // ← Applications router
 app.use('/api/resume', resumeRouter)   // ← Phase 5
 
+// Backend code
+app.use((req, res, next) => {
+  console.log(`Incoming Request: ${req.method} ${req.url}`);
+  console.log(`Headers:`, req.headers);
+  console.log(`Body:`, req.body);
+  next();
+});
 
 // ── Global Error Handler (always last) ───────────────
 app.use(errorHandler)
