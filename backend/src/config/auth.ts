@@ -6,7 +6,7 @@ const client = new MongoClient(process.env.MONGO_URI!);
 const db = client.db();
 import { env } from './env';
 
-const isProduction = env.NODE_ENV === "production";  // true only in production
+// const isProduction = env.NODE_ENV === "production";  // true only in production
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
@@ -16,17 +16,8 @@ export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
 
-  advanced: {
-		defaultCookieAttributes: {
-			sameSite: "none",
-			secure: true,
-      partitioned: true, // Required for modern browsers
-		},
-	},
-
   trustedOrigins: [
     env.CLIENT_URL, // "http://localhost:5173"
-    "https://layerhire.up.railway.app"
   ],
 
   emailAndPassword: {
@@ -62,8 +53,6 @@ export const auth = betterAuth({
     updateAge: 60 * 60 * 24,           // refresh session if older than 1 day
   },
 })
-
-console.log("✅ Better Auth initialized with sameSite: none");
 
 export type Session = typeof auth.$Infer.Session
 export type User = typeof auth.$Infer.Session.user
