@@ -12,6 +12,7 @@ import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
 const app = express()
 const PORT: number = parseInt(env.PORT || '3000', 10);
 
+app.use(express.json())
 app.set('trust proxy', 1); // Trust first proxy
 
 app.use(
@@ -35,11 +36,13 @@ app.get('/api/health', (_req, res) => {
   res.json({ success: true, message: 'Server is running', data: null })
 })
 
+
+
 app.use('/api/jobs', jobsRouter)       // ← Job router
 app.use('/api/applications', applicationsRouter)   // ← Applications router
 app.use('/api/resume', resumeRouter)   // ← Phase 5
 
-app.use(express.json())
+
 // ── Global Error Handler (always last) ───────────────
 app.use(errorHandler)
 

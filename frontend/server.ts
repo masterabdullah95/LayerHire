@@ -11,12 +11,33 @@ serve({
     if (url.pathname.startsWith("/api")) {
       const targetUrl = `${BACKEND_URL}${url.pathname}${url.search}`;
       
-      // Forward the request to the private backend
-      return fetch(targetUrl, {
+      // 1. Prepare headers (important for CORS and Content-Type)
+      const headers = new Headers(req.headers);
+      
+      // 2. Build the proxy request
+      const proxyReq = {
         method: req.method,
-        headers: req.headers,
-        body: req.body,
-      });
+        headers: headers,
+        body: req.body, // Pipe the stream directly
+      };
+
+      // 3. GET/HEAD cannot have a body in Fetch API
+      if (req.method === "GET" || req.method === "HEAD") {
+        delete (proxyReq as any).body;
+      }
+
+      try {
+        const backendResponse = await fetch(targetUrl, proxyReq);
+        
+        // 4. Return the response while preserving headers (especially Set-Cookie!)
+        return new Response(backendResponse.body, {
+          status: backendResponse.status,
+          headers: backendResponse.headers,
+        });
+      } catch (error) {
+        console.error("Proxy Error:", error);
+        return new Response("Backend Unavailable", { status: 502 });
+      }
     }
 
     // 2. Serve Static Frontend Files
