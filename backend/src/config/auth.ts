@@ -18,13 +18,8 @@ export const auth = betterAuth({
 	},
   // baseURL: env.BETTER_AUTH_URL,
   // Dynamic baseURL since you're using a proxy
-	baseURL: {
-		allowedHosts: [
-			"layerhire.up.railway.app",
-			"layerhire-api.up.railway.app",
-		],
-		protocol: "https",
-	},
+	baseURL: "https://layerhire-api.up.railway.app",
+  basePath: "/api/auth", // Is this set? Defaults to /api/auth
 
   advanced: {
 		disableOriginCheck: true, // Temporarily disable
