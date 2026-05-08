@@ -32,7 +32,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     // env.CLIENT_URL, // "http://localhost:5173"
     "https://layerhire.up.railway.app",
-		"https://layerhire-api.up.railway.app",
+		// "https://layerhire-api.up.railway.app",
   ],
 
   emailAndPassword: {
