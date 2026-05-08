@@ -17,11 +17,11 @@ export const auth = betterAuth({
   secret: env.BETTER_AUTH_SECRET,
 
   advanced: {
-		crossSubDomainCookies: {
-			enabled: true,
-			domain: ".up.railway.app", // Use leading dot or root domain
+		defaultCookieAttributes: {
+			sameSite: "none",
+			secure: true,
+      partitioned: true, // Required for modern browsers
 		},
-		useSecureCookies: true, // Required for cross-domain
 	},
 
   trustedOrigins: [
