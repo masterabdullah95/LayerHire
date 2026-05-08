@@ -18,7 +18,7 @@ export const auth = betterAuth({
 	},
   // baseURL: env.BETTER_AUTH_URL,
   // Dynamic baseURL since you're using a proxy
-	baseURL: "https://layerhire.up.railway.app/api", 
+	baseURL: "https://layerhire.up.railway.app", 
   // basePath: "/auth", // This makes the final URL /api/auth
 
   advanced: {
