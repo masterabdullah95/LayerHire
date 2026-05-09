@@ -21,24 +21,24 @@ export const auth = betterAuth({
 	// baseURL: "https://layerhire.up.railway.app", 
   // basePath: "/auth", // This makes the final URL /api/auth
 
-  advanced: {
-		// disableOriginCheck: true, // Temporarily disable
-		// disableCSRFCheck: true, // Temporarily disable
-    useSecureCookies: true, // Force secure since Railway is HTTPS
-    crossSubdomainCookies: false, // ✅ Don't use domain prefix
-	},
-
-  // ✅ NEW: Proper cookie configuration for cross-domain
-  cookie: {
-    name: "__Secure-better-auth.session_token",
-    attributes: {
-      httpOnly: true,
-      secure: true,           // ✅ Required for HTTPS (Render)
-      sameSite: "none",       // ✅ CRITICAL: "none" for cross-site cookies
-      path: "/",
-      domain: undefined,      // ✅ Don't restrict domain
+    advanced: {
+      useSecureCookies: true,
+      crossSubDomainCookies: {
+            enabled: true,
+            domain: env.CLIENT_URL, // your domain
+        },
+        cookies: {
+            session_token: {
+                name: "custom_session_token",
+                attributes: {
+                    // Set custom cookie attributes
+                    sameSite: "none", // This fixes the 'Cross-Site' block
+                    secure: true,     // Required when sameSite is 'none'
+                    httpOnly: true,
+                }
+            },
+        }
     },
-  },
 
   secret: env.BETTER_AUTH_SECRET,
 
