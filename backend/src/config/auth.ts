@@ -28,6 +28,18 @@ export const auth = betterAuth({
     crossSubdomainCookies: false, // ✅ Don't use domain prefix
 	},
 
+  // ✅ NEW: Proper cookie configuration for cross-domain
+  cookie: {
+    name: "better-auth.session_token",
+    attributes: {
+      httpOnly: true,
+      secure: true,           // ✅ Required for HTTPS (Render)
+      sameSite: "none",       // ✅ CRITICAL: "none" for cross-site cookies
+      path: "/",
+      domain: undefined,      // ✅ Don't restrict domain
+    },
+  },
+
   secret: env.BETTER_AUTH_SECRET,
 
   trustedOrigins: [
