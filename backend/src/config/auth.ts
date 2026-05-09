@@ -16,22 +16,22 @@ export const auth = betterAuth({
   logger: {
 		level: "debug", // See all validation errors
 	},
-  // baseURL: env.BETTER_AUTH_URL,
+  baseURL: env.BETTER_AUTH_URL,
   // Dynamic baseURL since you're using a proxy
-	baseURL: "https://layerhire.up.railway.app", 
+	// baseURL: "https://layerhire.up.railway.app", 
   // basePath: "/auth", // This makes the final URL /api/auth
 
-  advanced: {
-		disableOriginCheck: true, // Temporarily disable
-		disableCSRFCheck: true, // Temporarily disable
-    useSecureCookies: true, // Force secure since Railway is HTTPS
-	},
+  // advanced: {
+	// 	disableOriginCheck: true, // Temporarily disable
+	// 	disableCSRFCheck: true, // Temporarily disable
+  //   useSecureCookies: true, // Force secure since Railway is HTTPS
+	// },
 
   secret: env.BETTER_AUTH_SECRET,
 
   trustedOrigins: [
-    // env.CLIENT_URL, // "http://localhost:5173"
-    "https://layerhire.up.railway.app",
+    env.CLIENT_URL, // "http://localhost:5173"
+    // "https://layerhire.up.railway.app",
 		// "https://layerhire-api.up.railway.app",
   ],
 
