@@ -30,7 +30,7 @@ export const auth = betterAuth({
 
   // ✅ NEW: Proper cookie configuration for cross-domain
   cookie: {
-    name: "better-auth.session_token",
+    name: "__Secure-better-auth.session_token",
     attributes: {
       httpOnly: true,
       secure: true,           // ✅ Required for HTTPS (Render)
