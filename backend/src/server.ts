@@ -23,7 +23,7 @@ app.use(
       'layerhire-api.up.railway.app'
     ],
     // methods: ["GET", "POST", "PUT", "DELETE"], // allowed HTTP methods
-    // allowedHeaders: ["Content-Type", "Authorization"],
+    // allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     credentials: true, // allow cookies, auth headers, required — betterauth uses cookies
   }),
 );

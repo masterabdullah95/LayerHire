@@ -21,11 +21,12 @@ export const auth = betterAuth({
 	// baseURL: "https://layerhire.up.railway.app", 
   // basePath: "/auth", // This makes the final URL /api/auth
 
-  // advanced: {
-	// 	disableOriginCheck: true, // Temporarily disable
-	// 	disableCSRFCheck: true, // Temporarily disable
-  //   useSecureCookies: true, // Force secure since Railway is HTTPS
-	// },
+  advanced: {
+		// disableOriginCheck: true, // Temporarily disable
+		// disableCSRFCheck: true, // Temporarily disable
+    useSecureCookies: true, // Force secure since Railway is HTTPS
+    crossSubdomainCookies: false, // ✅ Don't use domain prefix
+	},
 
   secret: env.BETTER_AUTH_SECRET,
 
