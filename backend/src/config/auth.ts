@@ -32,7 +32,7 @@ export const auth = betterAuth({
                 name: "custom_session_token",
                 attributes: {
                     // Set custom cookie attributes
-                    sameSite: "none", // This fixes the 'Cross-Site' block
+                    sameSite: "None", // This fixes the 'Cross-Site' block
                     secure: true,     // Required when sameSite is 'none'
                     httpOnly: true,
                 }
