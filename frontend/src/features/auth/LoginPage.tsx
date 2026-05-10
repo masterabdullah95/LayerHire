@@ -38,7 +38,7 @@ const LoginPage = () => {
   const handleGoogle = async () => {
     await signIn.social({
       provider: 'google',
-      callbackURL: import.meta.env.VITE_APP_URL,   // ← redirect here after google auth
+      callbackURL: import.meta.env.VITE_APP_URL,   // ← redirect here after google auth, should be frontend url
     })
   }
 
