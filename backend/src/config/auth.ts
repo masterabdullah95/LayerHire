@@ -23,21 +23,16 @@ export const auth = betterAuth({
 
     advanced: {
       useSecureCookies: true,
-      crossSubDomainCookies: {
-            enabled: true,
-            domain: env.CLIENT_URL, // your domain
-        },
-        cookies: {
-            session_token: {
-                name: "custom_session_token",
-                attributes: {
-                    // Set custom cookie attributes
-                    sameSite: "None", // This fixes the 'Cross-Site' block
-                    secure: true,     // Required when sameSite is 'none'
-                    httpOnly: true,
-                }
-            },
-        }
+      cookies: {
+          session_token: {
+              attributes: {
+                  // Set custom cookie attributes
+                  sameSite: "None", // This fixes the 'Cross-Site' block
+                  secure: true,     // Required when sameSite is 'none'
+                  httpOnly: true,
+              }
+          },
+      }
     },
 
   secret: env.BETTER_AUTH_SECRET,
