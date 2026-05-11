@@ -6,50 +6,34 @@ const client = new MongoClient(process.env.MONGO_URI!);
 const db = client.db();
 import { env } from './env';
 
-// const isProduction = env.NODE_ENV === "production";  // true only in production
-
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
-    // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
-  logger: {
-		level: "debug", // See all validation errors
-	},
   baseURL: env.BETTER_AUTH_URL,
-  // Dynamic baseURL since you're using a proxy
-	// baseURL: "https://layerhire.up.railway.app", 
-  // basePath: "/auth", // This makes the final URL /api/auth
-
-    advanced: {
-      useSecureCookies: true,
-      cookies: {
-          session_token: {
-              attributes: {
-                  // Set custom cookie attributes
-                  sameSite: "None", // This fixes the 'Cross-Site' block
-                  secure: true,     // Required when sameSite is 'none'
-                  httpOnly: true,
-              }
-          },
-          state: {
+  secret: env.BETTER_AUTH_SECRET,
+  advanced: {
+    useSecureCookies: true,
+    cookies: {
+        session_token: {
             attributes: {
-                sameSite: "None",
-                secure: true,
+                sameSite: "None", // This fixes the 'Cross-Site' block
+                secure: true,     // Required when sameSite is 'none'
                 httpOnly: true,
             }
+        },
+        state: {
+          attributes: {
+              sameSite: "None",
+              secure: true,
+              httpOnly: true,
           }
-      }
-    },
-
-  secret: env.BETTER_AUTH_SECRET,
-
+        }
+    }
+  },
   trustedOrigins: [
-    env.CLIENT_URL, // "http://localhost:5173"
-    // "https://layerhire.up.railway.app",
-		// "https://layerhire-api.up.railway.app",
+    env.CLIENT_URL, 
   ],
-
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
