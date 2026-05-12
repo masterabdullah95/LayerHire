@@ -55,6 +55,7 @@ A production-grade job board application built with the MERN stack and modern to
 
 - Email/password registration and login
 - Google OAuth — single click sign in and sign up
+- Github OAuth — single click sign in and sign up
 - Role-based access control throughout the app
 - Fully responsive UI across all screen sizes
 - Persistent sessions via secure cookies
