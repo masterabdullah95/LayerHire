@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from '@/components/shared/Layout'
 import ProtectedRoute from './components/shared/ProtectedRoute.tsx'
+import RedirectRoute from './components/shared/RedirectRoute.tsx'
 import LoginPage from './features/auth/LoginPage.tsx'
 import RegisterPage from './features/auth/RegisterPage.tsx'
 import JobsPage from '@/pages/JobsPage'
@@ -24,9 +25,11 @@ const App = () => {
         {/* All pages with Navbar */}
         <Route element={<Layout />}>
 
-          {/* Auth pages — no navbar */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {/* Auth pages — Redirect to dashboard if logged in */}
+          <Route element={<RedirectRoute />}>  
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Route>
 
           {/* Public */}
           <Route path="/" element={<JobsPage />} />

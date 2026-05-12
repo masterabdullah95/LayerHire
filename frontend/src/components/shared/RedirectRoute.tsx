@@ -6,7 +6,7 @@ interface Props {
   allowedRole?: Role
 }
 
-const ProtectedRoute = ({ allowedRole }: Props) => {
+const RedirectRoute = ({ allowedRole }: Props) => {
   const { user, isLoading } = useAuth()
 
   if (isLoading) {
@@ -17,19 +17,12 @@ const ProtectedRoute = ({ allowedRole }: Props) => {
     )
   }
 
-  if (!user) return <Navigate to="/login" replace />
-
-  if (allowedRole && user.role !== allowedRole) {
-    return <Navigate to="/" replace />
-  }
-
   // If this is login or register page, and user is logged in, redirect to dashboard
   if (user && ['/login', '/register'].includes(location.pathname)) {
-    console.log('redirecting to dashboard')
     return <Navigate to="/dashboard" replace />
   }
 
   return <Outlet />
 }
 
-export default ProtectedRoute
+export default RedirectRoute
