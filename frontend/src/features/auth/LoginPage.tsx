@@ -42,6 +42,13 @@ const LoginPage = () => {
     })
   }
 
+  const handleGithub = async () => {
+    await signIn.social({
+      provider: 'github',
+      callbackURL: import.meta.env.VITE_APP_URL,   // ← redirect here after google auth, should be frontend url
+    })
+  }
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
       <Card className="w-full max-w-md">
@@ -59,6 +66,16 @@ const LoginPage = () => {
           >
             <img src="/google.svg" className="mr-2 h-4 w-4" alt="" />
             Continue with Google
+          </Button>
+
+          {/* Github OAuth */}
+          <Button
+            variant="outline"
+            className="w-full cursor-pointer"
+            onClick={handleGithub}
+          >
+            <img src="/github.svg" className="mr-2 h-4 w-4" alt="" />
+            Continue with Github
           </Button>
 
           <div className="relative">
