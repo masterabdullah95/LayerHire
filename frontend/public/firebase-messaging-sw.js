@@ -5,15 +5,20 @@ importScripts(
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js",
 );
 
+// 1. Load the environment file (reads the dev file locally, reads the overwritten file on live)
+importScripts('/sw-env.js');
+
+// 2. Map the keys from the global self.firebaseEnv object
 const firebaseConfig = {
-  apiKey: "AIzaSyDJuUSvZYK62d3iHrTHzukDBTZAi4e6FNk",
-  authDomain: "layerhire-local.firebaseapp.com",
-  projectId: "layerhire-local",
-  storageBucket: "layerhire-local.firebasestorage.app",
-  messagingSenderId: "599682064114",
-  appId: "1:599682064114:web:78de68a83d105917e07a6b",
+  apiKey: self.firebaseEnv.API_KEY,
+  authDomain: self.firebaseEnv.AUTH_DOMAIN,
+  projectId: self.firebaseEnv.PROJECT_ID,
+  storageBucket: self.firebaseEnv.STORAGE_BUCKET,
+  messagingSenderId: self.firebaseEnv.MESSAGING_SENDER_ID,
+  appId: self.firebaseEnv.APP_ID,
 };
 
+// 3. Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 

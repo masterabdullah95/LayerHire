@@ -263,6 +263,7 @@ FIREBASE_STORAGE_BUCKET=your_storage_bucket
 FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 FIREBASE_APP_ID=your_app_id
 [Frontend variables]
+Web Push certificates -> Key pair value is VAPID in firebase console
 VITE_FIREBASE_VAPID=your_vapid_key -> for frontend
 ```
 

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:env": "echo \"self.firebaseEnv = { API_KEY: '$VITE_API_KEY', AUTH_DOMAIN: '$VITE_AUTH_DOMAIN', PROJECT_ID: '$VITE_PROJECT_ID', STORAGE_BUCKET: '$VITE_STORAGE_BUCKET', MESSAGING_SENDER_ID: '$VITE_MESSAGING_SENDER_ID', APP_ID: '$VITE_APP_ID' };\" > public/sw-env.js",
+    "build": "tsc -b && npm run build:env && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
