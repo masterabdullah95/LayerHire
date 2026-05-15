@@ -1,6 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { MongoClient } from "mongodb"
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+// import { admin } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.MONGO_URI!);
 const db = client.db();
@@ -10,6 +11,9 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, {
     client
   }),
+  // plugins: [
+  //       admin() // This adds getUser, listUsers, etc. to auth.api
+  //   ],
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
   advanced: {
@@ -55,6 +59,11 @@ export const auth = betterAuth({
         type: 'string',
         defaultValue: 'seeker',         // 'seeker' | 'recruiter'
         input: true,                    // allow client to send this on signup
+      },
+      fcmToken: {
+        type: 'string',
+        defaultValue: '',         
+        required: false,
       },
     },
   },
