@@ -269,6 +269,10 @@ VITE_API_URL=http://localhost:3000
 VITE_APP_URL=http://localhost:5173
 ```
 
+#### On production
+
+- add firebase-messaging-sw.js in frontend/public folder
+
 #### Setting up Google OAuth
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com)

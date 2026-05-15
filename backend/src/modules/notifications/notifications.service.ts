@@ -1,6 +1,5 @@
 import * as generalAdmin from 'firebase-admin';
 import admin from 'firebase-admin';
-import ServiceAccount from './serviceAccountKey.json';
 import { env } from '../../config/env';
 
 export const notificationsService = {
