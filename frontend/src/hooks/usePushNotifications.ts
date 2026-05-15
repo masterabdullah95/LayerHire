@@ -23,7 +23,7 @@ export const usePushNotifications = (user: PushNotificationUser | null) => {
         const messaging = getMessaging(app);
         const token = await getToken(messaging, {
           serviceWorkerRegistration: registration,
-          vapidKey: import.meta.env.FIREBASE_VAPID,
+          vapidKey: import.meta.env.VITE_FIREBASE_VAPID,
         });
 
         if (token) {

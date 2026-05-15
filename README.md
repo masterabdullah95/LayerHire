@@ -256,6 +256,7 @@ SUPABASE_ANON_KEY=your_anon_key
 FIREBASE_PROJECT_ID=your_project_id
 FIREBASE_PRIVATE_KEY=your_private_key
 FIREBASE_CLIENT_EMAIL=your_client_email
+VITE_FIREBASE_VAPID=your_vapid_key -> for frontend
 ```
 
 **Frontend** — create `frontend/.env`:
