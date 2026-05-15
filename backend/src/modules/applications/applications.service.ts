@@ -1,9 +1,15 @@
 import { Application } from './applications.model'
 import { Job } from '../jobs/jobs.model'
+import { MongoClient, ObjectId } from "mongodb";
+const client = new MongoClient(process.env.MONGO_URI!);
+const db = client.db();
+
 import type {
   CreateApplicationDTO,
   UpdateApplicationStatusDTO,
 } from './applications.types.ts'
+import { notificationsService } from '../notifications/notifications.service';
+
 
 export const applicationsService = {
   /**
@@ -78,6 +84,41 @@ export const applicationsService = {
 
     application.status = data.status
     await application.save()
+
+    // Get seeker's Id from application
+    const seekerId = application.seekerId
+
+    // Get seeker's fcmToken from database
+    try {
+      const user = await db.collection("user").findOne({ _id: new ObjectId(seekerId) }, { projection: { fcmToken: 1 } });
+      const fcmToken = user?.fcmToken;
+
+      var title = '';
+      var body = '';
+
+      if (application.status === 'accepted') {
+        title = `Your application "${application.jobTitle}" has been approved`;
+        body = `Your application "${application.jobTitle}" has been approved. Please contact the recruiter for more information.`;
+      }else if (application.status === 'rejected') {
+        title = `Your application "${application.jobTitle}" has been rejected`;
+        body = `Your application "${application.jobTitle}" has been rejected. Please contact the recruiter for more information.`;
+      }else if (application.status === 'pending') {
+        title = `Your application "${application.jobTitle}" is pending`;
+        body = `Your application "${application.jobTitle}" is pending. Please contact the recruiter for more information.`;
+      }else if (application.status === 'reviewing') {
+        title = `Your application "${application.jobTitle}" is being reviewed`;
+        body = `Your application "${application.jobTitle}" is being reviewed. Please contact the recruiter for more information.`;
+      }
+      
+      if (fcmToken) {
+        // Send push notification to seeker
+        await notificationsService.sendPushNotification(fcmToken, title, body);
+      }
+
+    } catch (error) {
+      console.error('Error getting user:', error)
+      throw new Error('Cannot send push notification')
+    }
 
     return application
   },

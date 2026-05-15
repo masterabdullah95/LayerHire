@@ -17,3 +17,8 @@ export interface Session {
   ipAddress?: string | null
   userAgent?: string | null
 }
+
+export interface PushNotificationUser {
+  id: string;
+  email: string;
+}

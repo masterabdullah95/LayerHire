@@ -7,8 +7,9 @@ import { toNodeHandler } from 'better-auth/node'
 import { errorHandler } from './middleware/error.middleware'
 import jobsRouter from './modules/jobs/jobs.routes'
 import applicationsRouter from './modules/applications/applications.routes'
-import resumeRouter from './modules/resume/resume.routes'  // ← Phase 5
-import recruiterRouter from './modules/recruiter/recruiter.routes'  // ← Phase 5
+import resumeRouter from './modules/resume/resume.routes'
+import recruiterRouter from './modules/recruiter/recruiter.routes'
+import notificationsRouter from './modules/notifications/notifications.routes'
 
 const app = express()
 const PORT: number = parseInt(env.PORT || '3000', 10);
@@ -19,9 +20,7 @@ app.set('trust proxy', 1); // Trust first proxy
 app.use(
   cors({
     origin: [
-      env.CLIENT_URL ?? 'http://localhost:5173',
-      'https://layerhire.up.railway.app',
-      'layerhire-api.up.railway.app'
+      env.CLIENT_URL
     ],
     // methods: ["GET", "POST", "PUT", "DELETE"], // allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
@@ -41,6 +40,7 @@ app.use('/api/jobs', jobsRouter)       // ← Job router
 app.use('/api/applications', applicationsRouter)   // ← Applications router
 app.use('/api/resume', resumeRouter)   
 app.use('/api/recruiter', recruiterRouter)   
+app.use('/api/notifications', notificationsRouter)   
 
 // ── Global Error Handler (always last) ───────────────
 app.use(errorHandler)

@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth.ts'
 import type { Role } from '../../types/index.ts'
+import { usePushNotifications } from '@/hooks/usePushNotifications.ts'
 
 interface Props {
   allowedRole?: Role
@@ -8,6 +9,9 @@ interface Props {
 
 const ProtectedRoute = ({ allowedRole }: Props) => {
   const { user, isLoading } = useAuth()
+
+  // This (Push Notification) hook runs whenever the user object is available
+  usePushNotifications(user);
 
   if (isLoading) {
     return (
