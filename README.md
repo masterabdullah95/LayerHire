@@ -447,7 +447,7 @@ docker-compose down -v
 - [x] Phase 3 — Applications module (apply, track, recruiter dashboard)
 - [x] Phase 4 — Docker (containerize frontend + backend + MongoDB)
 - [x] Phase 5 — Supabase (resume PDF/docx uploads)
-- [x] Phase 6 — Firebase (push notifications on status change)
+- [x] Phase 6 — Firebase (push notifications on job application status change)
 - [x] Phase 7 — Deployment (Render)
 
 ---
