@@ -174,16 +174,16 @@ LayerHire/
 │   │   │   └── applications/            # ApplyModal, applications slice
 │   │   │       ├── applications.slice.ts
 │   │   │       ├── applications.types.ts
-│   │   │       └── ApplyModal.ts
+│   │   │       └── ApplyModal.ts       # ApplyModal component
 │   │   ├── hooks/                  # useAuth, useJobs, useApplications
-│   │   │   ├── useApplications.ts
-│   │   │   ├── useAuth.ts
-│   │   │   └── useJobs.ts
+│   │   │   ├── useApplications.ts   # useApplications hook
+│   │   │   ├── useAuth.ts           # useAuth hook
+│   │   │   └── useJobs.ts           # useJobs hook
 │   │   ├── lib/                    # Axios instance, auth client
-│   │   │   ├── auth-client.ts
-│   │   │   ├── axios.ts
-│   │   │   ├── resume.api.ts
-│   │   │   └── utils.ts
+│   │   │   ├── auth-client.ts       # Auth client
+│   │   │   ├── axios.ts             # Axios instance
+│   │   │   ├── resume.api.ts        # Resume upload API
+│   │   │   └── utils.ts             # Axios interceptors
 │   │   ├── pages/                  # JobsPage, JobDetailPage, PostJobPage, etc.
 │   │   │   ├── AboutPage.tsx
 │   │   │   ├── BlogPage.tsx
@@ -206,8 +206,8 @@ LayerHire/
 │   │   ├── App.tsx                 # Router setup
 │   │   └── main.tsx                # App entry point with providers
 │   ├── public/
-│   │   ├── firebase-messaging-sw.js
-│   │   └── sw-env.js
+│   │   ├── firebase-messaging-sw.js  # Firebase push notifications service worker
+│   │   └── sw-env.js                 # Environment variables for firebase-messaging-sw.js
 ├── docker-compose.yml
 ├── .env.example
 └── README.md
