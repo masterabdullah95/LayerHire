@@ -272,16 +272,15 @@ cp .env.example frontend/.env
 ```env
 VITE_API_URL=http://localhost:3000
 VITE_APP_URL=http://localhost:5173
-VITE_API_KEY=your_api_key
-VITE_APP_ID=your_app_id
-VITE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_VAPID=your_vapid_key
-VITE_MESSAGING_SENDER_ID=your_messaging_sender_id
-VITE_PROJECT_ID=your_project_id
-VITE_STORAGE_BUCKET
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_APP_ID
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
 
 In firebase console, Web Push certificates -> Key pair value is VAPID
-VITE_FIREBASE_VAPID=your_vapid_key
+VITE_FIREBASE_VAPID
 ```
 
 #### On production

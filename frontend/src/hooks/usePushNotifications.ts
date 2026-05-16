@@ -11,6 +11,7 @@ export const usePushNotifications = (user: PushNotificationUser | null) => {
   useEffect(() => {
     // 1. Register the Service Worker
     const registerServiceWorker = async () => {
+      console.log('registering service worker');
       if ('serviceWorker' in navigator) {
         return await navigator.serviceWorker.register('/firebase-messaging-sw.js');
       }
