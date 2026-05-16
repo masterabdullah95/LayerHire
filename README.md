@@ -31,6 +31,11 @@ A production-grade job board application built with the MERN stack and modern to
 
 ---
 
+## Deployed on Railway & Render
+
+https://layerhire.up.railway.app [Deployed using docker containers]
+https://layerhire-front.onrender.com
+
 ## Features
 
 ### Job Seekers
