@@ -10,12 +10,12 @@ importScripts("/sw-env.js");
 
 // Map the keys from the global self.firebaseEnv object
 const firebaseConfig = {
-  apiKey: self.API_KEY,
-  authDomain: self.AUTH_DOMAIN,
-  projectId: self.PROJECT_ID,
-  storageBucket: self.STORAGE_BUCKET,
-  messagingSenderId: self.MESSAGING_SENDER_ID,
-  appId: self.APP_ID,
+  apiKey: self.apiKey,
+  authDomain: self.authDomain,
+  projectId: self.projectId,
+  storageBucket: self.storageBucket,
+  messagingSenderId: self.messagingSenderId,
+  appId: self.appId,
 };
 
 // Initialize Firebase
