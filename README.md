@@ -42,6 +42,7 @@ A production-grade job board application built with the MERN stack and modern to
 - Can upload resume on profile page
 - Apply with a cover letter, CV attach automatically — one application per job enforced
 - Track all applications and their status in real time
+- Seeker will get push notifications on job application status change
 
 ### Recruiters
 
@@ -50,6 +51,7 @@ A production-grade job board application built with the MERN stack and modern to
 - View all incoming applications in a dashboard along with CVs
 - Update application status — pending, reviewing, accepted, rejected
 - Application stats overview with live counts
+- When recruiter changes application status, push notifications will be sent to the seeker
 
 ### General
 
@@ -66,27 +68,29 @@ A production-grade job board application built with the MERN stack and modern to
 
 ### Frontend
 
-| Technology            | Purpose                      |
-| --------------------- | ---------------------------- |
-| React 19 + TypeScript | UI framework                 |
-| Vite + Bun            | Build tool and dev server    |
-| React Router v7       | Client-side routing          |
-| Redux Toolkit         | Global state management      |
-| TailwindCSS v4        | Utility-first styling        |
-| Shadcn/ui + Radix     | Accessible component library |
-| Lucide React          | Icon library                 |
-| Axios                 | HTTP client                  |
-| BetterAuth (client)   | Session management           |
+| Technology                 | Purpose                      |
+| -------------------------- | ---------------------------- |
+| React 19 + TypeScript      | UI framework                 |
+| Vite + Bun                 | Build tool and dev server    |
+| React Router v7            | Client-side routing          |
+| Redux Toolkit              | Global state management      |
+| TailwindCSS v4             | Utility-first styling        |
+| Shadcn/ui + Radix          | Accessible component library |
+| Lucide React               | Icon library                 |
+| Axios                      | HTTP client                  |
+| BetterAuth (client)        | Session management           |
+| Firebase Push Notification | Firebase Push Notification   |
 
 ### Backend
 
-| Technology            | Purpose                                |
-| --------------------- | -------------------------------------- |
-| Express + TypeScript  | REST API server                        |
-| Bun                   | JavaScript runtime and package manager |
-| MongoDB + Mongoose    | Database and ODM                       |
-| BetterAuth            | Authentication (email + Google OAuth)  |
-| MongoDB Native Driver | BetterAuth database adapter            |
+| Technology                 | Purpose                                |
+| -------------------------- | -------------------------------------- |
+| Express + TypeScript       | REST API server                        |
+| Bun                        | JavaScript runtime and package manager |
+| MongoDB + Mongoose         | Database and ODM                       |
+| BetterAuth                 | Authentication (email + Google OAuth)  |
+| MongoDB Native Driver      | BetterAuth database adapter            |
+| Firebase Push Notification | Firebase Push Notification             |
 
 ### DevOps
 
@@ -124,6 +128,16 @@ LayerHire/
 │       │   │   ├── applications.service.ts
 │       │   │   ├── applications.controller.ts
 │       │   │   └── applications.routes.ts
+│       │   ├── recruiter/       # Recruiter module
+│       │   │   ├── recruiter.model.ts
+│       │   │   ├── recruiter.types.ts
+│       │   │   ├── recruiter.service.ts
+│       │   │   ├── recruiter.controller.ts
+│       │   │   └── recruiter.routes.ts
+│       │   ├── notifications/       # Notifications module
+│       │   │   ├── notifications.service.ts
+│       │   │   ├── notifications.controller.ts
+│       │   │   └── notifications.routes.ts
 │       │   └── resume/             # Resume module
 │       │       ├── resume.controller.ts
 │       │       └── resume.routes.ts
@@ -133,60 +147,62 @@ LayerHire/
 │       └── server.ts               # App entry point
 │
 ├── frontend/
-│   └── src/
-│       ├── components/
-│       │   ├── ui/                 # Shadcn generated components
-│       │   └── shared/             # Navbar, Layout, ProtectedRoute, JobCard
-│       │       ├── Footer.tsx
-│       │       ├── JobCard.tsx
-│       │       ├── Layout.tsx      # Main layout
-│       │       ├── Navbar.tsx
-│       │       ├── ProtectedRoute.tsx   # Protected layout
-│       │       └── ResumeUpload.tsx     # Resume upload component
-│       ├── features/
-│       │   ├── auth/                    # Login, Register, auth slice
-│       │   │   ├── auth.slice.ts
-│       │   │   ├── LoginPage.tsx
-│       │   │   └── RegisterPage.tsx
-│       │   ├── jobs/                    # Jobs slice and types
-│       │   │   ├── EditJobModal.tsx
-│       │   │   ├── jobs.slice.ts
-│       │   │   └── jobs.types.ts
-│       │   └── applications/            # ApplyModal, applications slice
-│       │       ├── applications.slice.ts
-│       │       ├── applications.types.ts
-│       │       └── ApplyModal.ts
-│       ├── hooks/                  # useAuth, useJobs, useApplications
-│       │   ├── useApplications.ts
-│       │   ├── useAuth.ts
-│       │   └── useJobs.ts
-│       ├── lib/                    # Axios instance, auth client
-│       │   ├── auth-client.ts
-│       │   ├── axios.ts
-│       │   ├── resume.api.ts
-│       │   └── utils.ts
-│       ├── pages/                  # JobsPage, JobDetailPage, PostJobPage, etc.
-│       │   ├── AboutPage.tsx
-│       │   ├── BlogPage.tsx
-│       │   ├── CareersPage.tsx
-│       │   ├── ContactPage.tsx
-│       │   ├── DashboardPage.tsx
-│       │   ├── JobDetailPage.tsx
-│       │   ├── JobsPage.tsx
-│       │   ├── MyApplicationsPage.tsx
-│       │   ├── PostJobPage.tsx
-│       │   ├── PrivacyPolicyPage.tsx
-│       │   ├── RecruiterDashboard.tsx
-│       │   ├── SeekerDashboard.tsx
-│       │   └── TermsOfServicePage.tsx
-│       ├── store/                  # Redux store
-│       │   └── index.ts
-│       ├── types/                  # Shared TypeScript interfaces
-│       │   ├── auth.types.ts
-│       │   └── index.ts
-│       ├── App.tsx                 # Router setup
-│       └── main.tsx                # App entry point with providers
-│
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ui/                 # Shadcn generated components
+│   │   │   └── shared/             # Navbar, Layout, ProtectedRoute, JobCard
+│   │   │       ├── Footer.tsx
+│   │   │       ├── JobCard.tsx
+│   │   │       ├── Layout.tsx      # Main layout
+│   │   │       ├── Navbar.tsx
+│   │   │       ├── ProtectedRoute.tsx   # Protected layout
+│   │   │       └── ResumeUpload.tsx     # Resume upload component
+│   │   ├── features/
+│   │   │   ├── auth/                    # Login, Register, auth slice
+│   │   │   │   ├── auth.slice.ts
+│   │   │   │   ├── LoginPage.tsx
+│   │   │   │   └── RegisterPage.tsx
+│   │   │   ├── jobs/                    # Jobs slice and types
+│   │   │   │   ├── EditJobModal.tsx
+│   │   │   │   ├── jobs.slice.ts
+│   │   │   │   └── jobs.types.ts
+│   │   │   └── applications/            # ApplyModal, applications slice
+│   │   │       ├── applications.slice.ts
+│   │   │       ├── applications.types.ts
+│   │   │       └── ApplyModal.ts
+│   │   ├── hooks/                  # useAuth, useJobs, useApplications
+│   │   │   ├── useApplications.ts
+│   │   │   ├── useAuth.ts
+│   │   │   └── useJobs.ts
+│   │   ├── lib/                    # Axios instance, auth client
+│   │   │   ├── auth-client.ts
+│   │   │   ├── axios.ts
+│   │   │   ├── resume.api.ts
+│   │   │   └── utils.ts
+│   │   ├── pages/                  # JobsPage, JobDetailPage, PostJobPage, etc.
+│   │   │   ├── AboutPage.tsx
+│   │   │   ├── BlogPage.tsx
+│   │   │   ├── CareersPage.tsx
+│   │   │   ├── ContactPage.tsx
+│   │   │   ├── DashboardPage.tsx
+│   │   │   ├── JobDetailPage.tsx
+│   │   │   ├── JobsPage.tsx
+│   │   │   ├── MyApplicationsPage.tsx
+│   │   │   ├── PostJobPage.tsx
+│   │   │   ├── PrivacyPolicyPage.tsx
+│   │   │   ├── RecruiterDashboard.tsx
+│   │   │   ├── SeekerDashboard.tsx
+│   │   │   └── TermsOfServicePage.tsx
+│   │   ├── store/                  # Redux store
+│   │   │   └── index.ts
+│   │   ├── types/                  # Shared TypeScript interfaces
+│   │   │   ├── auth.types.ts
+│   │   │   └── index.ts
+│   │   ├── App.tsx                 # Router setup
+│   │   └── main.tsx                # App entry point with providers
+│   ├── public/
+│   │   ├── firebase-messaging-sw.js
+│   │   └── sw-env.js
 ├── docker-compose.yml
 ├── .env.example
 └── README.md
@@ -272,12 +288,12 @@ cp .env.example frontend/.env
 ```env
 VITE_API_URL=http://localhost:3000
 VITE_APP_URL=http://localhost:5173
-VITE_FIREBASE_API_KEY
-VITE_FIREBASE_APP_ID
-VITE_FIREBASE_AUTH_DOMAIN
-VITE_FIREBASE_MESSAGING_SENDER_ID
-VITE_FIREBASE_PROJECT_ID
-VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_APP_ID=your_firebase_app_id
+VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
 
 In firebase console, Web Push certificates -> Key pair value is VAPID
 VITE_FIREBASE_VAPID
@@ -285,7 +301,7 @@ VITE_FIREBASE_VAPID
 
 #### On production for Firebase
 
-- add firebase-messaging-sw.js in frontend/public folder
+- firebase-messaging-sw.js is already added to frontend/public folder
 - Add below scripts in package.json
 
 ```bash
