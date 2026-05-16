@@ -18,6 +18,7 @@ const firebaseConfig = {
   appId: self.appId,
 };
 
+console.log("self.projectId: ", self.projectId);
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
