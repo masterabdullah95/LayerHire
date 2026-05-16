@@ -283,9 +283,15 @@ In firebase console, Web Push certificates -> Key pair value is VAPID
 VITE_FIREBASE_VAPID
 ```
 
-#### On production
+#### On production for Firebase
 
 - add firebase-messaging-sw.js in frontend/public folder
+- Add below scripts in package.json
+
+```bash
+"build:env": "echo \"self.apiKey = '$VITE_FIREBASE_API_KEY'; self.authDomain = '$VITE_FIREBASE_AUTH_DOMAIN'; self.projectId = '$VITE_FIREBASE_PROJECT_ID'; self.storageBucket = '$VITE_FIREBASE_STORAGE_BUCKET'; self.messagingSenderId = '$VITE_FIREBASE_MESSAGING_SENDER_ID'; self.appId = '$VITE_FIREBASE_APP_ID';\" > public/sw-env.js",
+    "build": "tsc -b && npm run build:env && vite build",
+```
 
 #### Setting up Google OAuth
 
