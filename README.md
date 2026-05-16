@@ -445,10 +445,10 @@ docker-compose down -v
 - [x] Phase 1 — Authentication (BetterAuth + Google OAuth + roles)
 - [x] Phase 2 — Jobs module (CRUD + search + filters + pagination)
 - [x] Phase 3 — Applications module (apply, track, recruiter dashboard)
-- [ ] Phase 4 — Docker (containerize frontend + backend + MongoDB)
+- [x] Phase 4 — Docker (containerize frontend + backend + MongoDB)
 - [x] Phase 5 — Supabase (resume PDF/docx uploads)
-- [ ] Phase 6 — Firebase (push notifications on status change)
-- [ ] Phase 7 — Deployment (Railway / Render)
+- [x] Phase 6 — Firebase (push notifications on status change)
+- [x] Phase 7 — Deployment (Render)
 
 ---
 
