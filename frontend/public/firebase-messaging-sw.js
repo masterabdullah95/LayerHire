@@ -8,26 +8,19 @@ importScripts(
 // Load the environment file (reads the dev file locally, reads the overwritten file on live)
 importScripts("/sw-env.js");
 
-// Add a defensive fallback check to ensure variables are fully mapped
-if (typeof self.firebaseEnv !== "undefined" && self.firebaseEnv.PROJECT_ID) {
-  // Map the keys from the global self.firebaseEnv object
-  const firebaseConfig = {
-    apiKey: self.firebaseEnv.API_KEY,
-    authDomain: self.firebaseEnv.AUTH_DOMAIN,
-    projectId: self.firebaseEnv.PROJECT_ID,
-    storageBucket: self.firebaseEnv.STORAGE_BUCKET,
-    messagingSenderId: self.firebaseEnv.MESSAGING_SENDER_ID,
-    appId: self.firebaseEnv.APP_ID,
-  };
+// Map the keys from the global self.firebaseEnv object
+const firebaseConfig = {
+  apiKey: self.API_KEY,
+  authDomain: self.AUTH_DOMAIN,
+  projectId: self.PROJECT_ID,
+  storageBucket: self.STORAGE_BUCKET,
+  messagingSenderId: self.MESSAGING_SENDER_ID,
+  appId: self.APP_ID,
+};
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const messaging = firebase.messaging();
-} else {
-  console.error(
-    "Firebase Service Worker: self.firebaseEnv config keys are missing or delayed.",
-  );
-}
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
 
 // Handle background messages (when tab is not in focus)
 // messaging.onBackgroundMessage((payload) => {

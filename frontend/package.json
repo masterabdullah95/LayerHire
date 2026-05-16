@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:env": "echo \"self.firebaseEnv = { API_KEY: '$VITE_API_KEY', AUTH_DOMAIN: '$VITE_AUTH_DOMAIN', PROJECT_ID: '$VITE_PROJECT_ID', STORAGE_BUCKET: '$VITE_STORAGE_BUCKET', MESSAGING_SENDER_ID: '$VITE_MESSAGING_SENDER_ID', APP_ID: '$VITE_APP_ID' };\" > public/sw-env.js",
+    "build:env": "echo \"self.apiKey = '$VITE_API_KEY'; self.authDomain = '$VITE_AUTH_DOMAIN'; self.projectId = '$VITE_PROJECT_ID'; self.storageBucket = '$VITE_STORAGE_BUCKET'; self.messagingSenderId = '$VITE_MESSAGING_SENDER_ID'; self.appId = '$VITE_APP_ID';\" > public/sw-env.js",
     "build": "tsc -b && npm run build:env && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
