@@ -47,6 +47,7 @@ app.use(errorHandler)
 
 // ── Start ─────────────────────────────────────────────
 await connectDB()
+// Host is not in use anymore
 const HOST = env.HOST || '0.0.0.0';
 // app.listen(PORT, HOST, () => console.log(`✓ Server running on https://${HOST}:${PORT}`))
 app.listen(PORT, () => console.log(`✓ Server running on http://${HOST}:${PORT}`))
